@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
 @section('container')
-    <h1>Halaman Home</h1>
+    <h1>LANDING PAGE</h1>
+    <h3>Kueku | Toko Kue</h3>
 @endsection
- 

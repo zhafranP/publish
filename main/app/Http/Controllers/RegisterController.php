@@ -9,22 +9,22 @@ use App\Models\User;
 class RegisterController extends Controller
 {
     public function index() {
-        return view('register.index', [
-            'title' => 'Register',
-            'active' => 'register'
-        ] );
+        return view('register', [
+            'title' => 'register'
+        ]);
     }
 
     public function store(Request $request) {
-        $validatedData = $request->validate([
-            'name' => ['required', 'max:255'],
-            'username' => ['required', 'min:3', 'max:30', 'unique:users'],
+        $validateData = $request->validate([
+            'name' => 'required|min:5|max:225',
             'email' => 'required|email:dns|unique:users',
-            'password' => 'required|min:5|max:225'
+            'contact' => 'required|numeric|digits_between:12,13|unique:users',
+            'password' => 'required|min:8|max:225'
         ]);
+         
 
-        $validatedData['password'] = Hash::make($validatedData['password']);
-        User::create($validatedData);
+        $validateData['password'] = Hash::make($validateData['password']);
+        User::create($validateData);
 
         return redirect('/login')->with('success', 'Registration Successfull! Please Login');
     }
